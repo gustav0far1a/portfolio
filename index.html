@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dev Gustavo Faria</title>
+<meta name="description" content="Desenvolvedor web e de automações no Paraná. Sites institucionais, sistemas internos e ferramentas que resolvem problema de gente real.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='32' fill='%23000'/%3E%3Cline x1='39' y1='17' x2='25' y2='47' stroke='%23fff' stroke-width='6'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Newsreader:opsz,wght@6..72,300;6..72,400;6..72,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --preto:#000000;
+    --branco:#ffffff;
+    --cinza:#8f8f8f;
+    --linha:rgba(255,255,255,.16);
+    --linha-inv:rgba(0,0,0,.16);
+    --col:min(64ch, 100%);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--preto);
+    color:var(--branco);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:17px;
+    font-weight:300;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.grotesk{
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;
+    font-weight:700;
+    letter-spacing:-.055em;
+    line-height:1.14;
+    margin:0;
+    font-feature-settings:"calt" 1;
+  }
+  /* títulos de seção escritos como tag, no espírito da logo */
+  h2 .tag{color:var(--cinza);font-weight:400}
+  .invertida h2 .tag{color:rgba(0,0,0,.42)}
+  a{color:inherit}
+
+  /* ---------- trilha lateral ---------- */
+  .trilha{
+    position:fixed;
+    left:38px; top:0; bottom:0;
+    width:34px;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:34px;
+    z-index:10;
+    mix-blend-mode:difference;
+  }
+  .trilha a{
+    display:block;
+    width:22px; height:26px;
+    opacity:.34;
+    transition:opacity .25s ease;
+    text-decoration:none;
+  }
+  .trilha a:hover,.trilha a[aria-current="true"]{opacity:1}
+  .trilha svg{display:block;width:100%;height:100%}
+  .trilha svg *{stroke:#fff;stroke-width:9;fill:none}
+
+  /* ---------- estrutura ---------- */
+  main{padding-left:132px}
+  .faixa{padding:0 48px 0 0}
+  .interna{max-width:var(--col)}
+  section{padding:112px 0}
+  section+section{border-top:1px solid var(--linha)}
+
+  /* ---------- abertura ---------- */
+  .abertura{
+    min-height:100svh;
+    display:flex; align-items:center;
+    padding:96px 48px 96px 0;
+    border:0;
+  }
+  .marca{
+    width:64px; height:214px;
+    flex:none;
+    margin-right:52px;
+  }
+  .marca line,.marca polyline{
+    stroke:#fff; stroke-width:8; fill:none;
+    stroke-dasharray:var(--d,200);
+    stroke-dashoffset:var(--d,200);
+    animation:tracar .7s cubic-bezier(.65,0,.35,1) forwards;
+  }
+  .marca .g1{animation-delay:.12s}
+  .marca .g2{animation-delay:.34s}
+  .marca .g3{animation-delay:.56s}
+  @keyframes tracar{to{stroke-dashoffset:0}}
+
+  .abertura h1{font-size:clamp(34px,5.6vw,68px)}
+  .abertura .linha-role{
+    font-size:clamp(18px,2vw,23px);
+    line-height:1.5;
+    margin:26px 0 0;
+    max-width:34ch;
+  }
+  .abertura .meta{
+    margin-top:40px;
+    font-size:15px;
+    color:var(--cinza);
+    line-height:2;
+  }
+  .abertura .texto{opacity:0;animation:surgir .8s ease .8s forwards}
+  @keyframes surgir{to{opacity:1}}
+
+  .disponivel{
+    display:inline-flex; align-items:center; gap:9px;
+    color:var(--branco);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,.3);
+    padding-bottom:2px;
+    transition:border-color .2s ease;
+  }
+  .disponivel:hover{border-color:#fff}
+  .ponto{
+    width:7px;height:7px;border-radius:50%;
+    background:#fff;flex:none;
+  }
+
+  /* ---------- trabalhos ---------- */
+  h2{font-size:clamp(24px,2.8vw,33px);margin-bottom:12px}
+  .intro-secao{color:var(--cinza);margin:0 0 56px;max-width:52ch}
+
+  .caso{border-top:1px solid var(--linha);padding-top:40px;max-width:74ch}
+  .caso h3{font-size:clamp(21px,2.4vw,27px);font-weight:700}
+  .caso .stack{
+    display:block;margin-top:12px;
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;
+    font-size:13px;color:var(--cinza);letter-spacing:-.02em;
+  }
+  .caso .resumo{margin:26px 0 0;max-width:58ch}
+  .detalhes{margin:40px 0 0;display:grid;gap:2px}
+  .detalhes>div{
+    display:grid;
+    grid-template-columns:minmax(0,11rem) minmax(0,1fr);
+    gap:8px 32px;
+    padding:16px 0;
+    border-top:1px solid var(--linha);
+  }
+  .detalhes dt{
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:13px;
+    color:var(--cinza);padding-top:4px;
+  }
+  .detalhes dd{margin:0;font-size:16px;line-height:1.6;max-width:50ch}
+  .ver{
+    display:inline-block;margin-top:36px;
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:16px;
+    letter-spacing:-.01em;
+    padding-bottom:5px;
+    border-bottom:1px solid var(--branco);
+    text-decoration:none;
+    transition:opacity .2s ease;
+  }
+  .ver:hover{opacity:.6}
+
+  /* ---------- sobre (polaridade invertida) ---------- */
+  .invertida{
+    background:var(--branco);
+    color:var(--preto);
+    margin-left:-132px;
+    padding:112px 48px 112px 132px;
+    border:0;
+  }
+  .invertida .destaque{
+    font-size:clamp(21px,2.6vw,28px);
+    line-height:1.5;
+    font-weight:300;
+    margin:0 0 32px;
+  }
+  .invertida p{max-width:62ch}
+  .invertida .ferramentas{
+    margin-top:44px;padding-top:26px;
+    border-top:1px solid var(--linha-inv);
+    font-size:15px;line-height:1.6;
+  }
+  .invertida .ferramentas p{
+    display:grid;
+    grid-template-columns:minmax(0,8.5rem) minmax(0,1fr);
+    gap:4px 20px;
+    margin:0;padding:9px 0;
+  }
+  .invertida .ferramentas p+p{border-top:1px solid rgba(0,0,0,.08)}
+  .invertida .ferramentas b{font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:13px}
+
+  /* ---------- contato ---------- */
+  .contato p{max-width:52ch;color:var(--cinza);margin:0 0 40px}
+  .canais{list-style:none;margin:0;padding:0}
+  .canais li{border-bottom:1px solid var(--linha)}
+  .canais li:first-child{border-top:1px solid var(--linha)}
+  .canais a{
+    display:flex;align-items:baseline;gap:20px;
+    padding:20px 4px;
+    text-decoration:none;
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:19px;
+    letter-spacing:-.02em;
+    transition:padding-left .2s ease;
+  }
+  .canais a:hover,.canais a:focus-visible{padding-left:14px}
+  .canais .qual{
+    font-family:"Newsreader",serif;font-weight:300;font-size:15px;
+    color:var(--cinza);
+  }
+
+  footer{
+    padding:40px 48px 56px 0;
+    border-top:1px solid var(--linha);
+    color:var(--cinza);font-size:14px;
+  }
+
+  a:focus-visible,.trilha a:focus-visible{
+    outline:2px solid #fff;outline-offset:4px;opacity:1;
+  }
+  .invertida a:focus-visible{outline-color:#000}
+
+  @media (max-width:820px){
+    body{font-size:16px}
+    .trilha{display:none}
+    main{padding-left:24px}
+    .faixa,footer{padding-right:24px}
+    .abertura{padding:72px 24px 72px 0;min-height:auto;flex-direction:column;align-items:flex-start}
+    .marca{width:46px;height:154px;margin:0 0 40px}
+    section{padding:72px 0}
+    .detalhes>div{grid-template-columns:1fr;gap:6px;padding:14px 0}
+    .detalhes dt{padding-top:0}
+    .invertida{margin-left:-24px;padding:72px 24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .marca line,.marca polyline{stroke-dashoffset:0}
+    .abertura .texto{opacity:1}
+  }
+</style>
+</head>
+<body>
+
+<nav class="trilha" aria-label="Seções">
+  <a href="#topo" aria-label="Início" data-alvo="topo">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><polyline points="28,6 10,20 28,34"/></svg>
+  </a>
+  <a href="#trabalhos" aria-label="Trabalhos" data-alvo="trabalhos">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><line x1="27" y1="5" x2="13" y2="35"/></svg>
+  </a>
+  <a href="#contato" aria-label="Contato" data-alvo="contato">
+    <svg viewBox="0 0 40 40" aria-hidden="true"><polyline points="12,6 30,20 12,34"/></svg>
+  </a>
+</nav>
+
+<main>
+
+  <header class="abertura" id="topo">
+    <svg class="marca" viewBox="0 0 60 200" aria-label="Logo de Gustavo" role="img">
+      <polyline class="g1" points="44,10 14,36 44,62" style="--d:80"/>
+      <line class="g2" x1="44" y1="86" x2="16" y2="140" style="--d:62"/>
+      <polyline class="g3" points="16,164 46,190 16,200" style="--d:80"/>
+    </svg>
+    <div class="texto">
+      <h1>Gustavo<br>Faria</h1>
+      <p class="linha-role">Transforme a presença digital do seu negócio com sites e sistemas feitos do começo ao fim para gerar resultados.</p>
+      <div class="meta">
+        <a class="disponivel" href="#contato"><span class="ponto"></span>Vamos trabalhar juntos para transformar o seu negócio?</a><br>
+        Apucarana, PR.
+      </div>
+    </div>
+  </header>
+
+  <div class="faixa">
+    <section id="trabalhos">
+      <div class="interna">
+        <h2><span class="tag">&lt;</span>trabalho<span class="tag">&gt;</span></h2>
+        <p class="intro-secao">Um projeto entregue do começo ao fim, do primeiro rascunho ao domínio no ar.</p>
+      </div>
+
+      <article class="caso">
+        <h3>Alani Yanai, psicóloga</h3>
+        <span class="stack">Site institucional, Apucarana PR</span>
+        <p class="resumo">Uma página só, construída em cima do manual de marca da cliente: paleta, logo e tipografia vieram prontos, e o trabalho foi transformar isso em algo que funciona para quem procura terapia às onze da noite.</p>
+        <dl class="detalhes">
+          <div><dt>O que fiz</dt><dd>Layout, código, publicação e a documentação para ela mesma atualizar os textos.</dd></div>
+          <div><dt>Tecnologias</dt><dd>HTML, CSS e JavaScript, fontes hospedadas no próprio servidor, deploy na Cloudflare Pages.</dd></div>
+          <div><dt>Domínio</dt><dd>Registro no registro.br e configuração de DNS ponta a ponta.</dd></div>
+        </dl>
+        <a class="ver" href="https://alaniyanai.com.br">Ver o site no ar</a>
+      </article>
+    </section>
+  </div>
+
+  <section class="invertida" id="sobre">
+    <div class="interna">
+      <h2><span class="tag">&lt;</span>sobre<span class="tag">&gt;</span></h2>
+      <p class="destaque">Comecei no desenvolvimento front-end, mas logo entendi que o desafio de um pequeno negócio vai muito além de ter um site bonito.</p>
+      <p>O ponto central é identificar exatamente o que você precisa neste momento. Pode ser um portfólio profissional para transmitir credibilidade, ou um sistema funcional para gerenciar seus pedidos. Por isso o primeiro passo é uma conversa tranquila para analisar o seu cenário real.</p>
+      <p>Trabalho na indústria durante o dia, uma experiência que me ensinou a traduzir o tecnologês para uma linguagem simples e a criar soluções práticas que funcionam sem complicação. Foi ali também que aprendi a automatizar o trabalho repetitivo, escrevendo programas que geram documentos e relatórios no lugar de alguém fazer isso na mão.</p>
+      <p>Atualmente curso Engenharia de Software e desenvolvo meus projetos do início ao fim, do entendimento da demanda e do design até a programação e a publicação. Mas antes de escrever qualquer linha de código, o meu compromisso é me alinhar com você para construirmos algo que faça sentido para o seu negócio e te deixe empolgado com o resultado.</p>
+      <div class="ferramentas">
+        <p><b>Web</b><span>HTML, CSS, JavaScript, React, Node.js, MySQL</span></p>
+        <p><b>Automação</b><span>Python, openpyxl, python-docx, pandas, Playwright</span></p>
+        <p><b>Hardware</b><span>ESP32, Arduino, integração com APIs</span></p>
+        <p><b>Entrega</b><span>Git, Cloudflare Pages, configuração de domínio</span></p>
+      </div>
+    </div>
+  </section>
+
+  <div class="faixa">
+    <section class="contato" id="contato">
+      <div class="interna">
+        <h2><span class="tag">&lt;</span>contato<span class="tag">&gt;</span></h2>
+        <p>Me conte o que você precisa e eu respondo com prazo e valor. Orçamento sem compromisso.</p>
+        <ul class="canais">
+          <li><a href="https://wa.me/qr/NFNOEMCKFNKXF1"><span>WhatsApp</span><span class="qual">resposta no mesmo dia</span></a></li>
+          <li><a href="mailto:gustavofaria0137@gmail.com"><span>E-mail</span><span class="qual">gustavofaria0137@gmail.com</span></a></li>
+          <li><a href="https://www.linkedin.com/in/gustavo-faria-61321a213"><span>LinkedIn</span><span class="qual">experiência e formação</span></a></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <footer>Gustavo Faria, Apucarana, Paraná.</footer>
+
+</main>
+
+<script>
+  const alvos = [...document.querySelectorAll('.trilha a')];
+  const secoes = alvos.map(a => document.getElementById(a.dataset.alvo)).filter(Boolean);
+  const obs = new IntersectionObserver(entradas => {
+    entradas.forEach(e => {
+      if (!e.isIntersecting) return;
+      alvos.forEach(a => a.setAttribute('aria-current', String(a.dataset.alvo === e.target.id)));
+    });
+  }, { rootMargin: '-45% 0px -45% 0px' });
+  secoes.forEach(s => obs.observe(s));
+</script>
+
+</body>
+</html>
