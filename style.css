@@ -1,0 +1,228 @@
+:root{
+    --preto:#000000;
+    --branco:#ffffff;
+    --cinza:#8f8f8f;
+    --linha:rgba(255,255,255,.16);
+    --linha-inv:rgba(0,0,0,.16);
+    --col:min(64ch, 100%);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--preto);
+    color:var(--branco);
+    font-family:"Newsreader",Georgia,serif;
+    font-size:17px;
+    font-weight:300;
+    line-height:1.72;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.grotesk{
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;
+    font-weight:700;
+    letter-spacing:-.055em;
+    line-height:1.14;
+    margin:0;
+    font-feature-settings:"calt" 1;
+  }
+  /* títulos de seção escritos como tag, no espírito da logo */
+  h2 .tag{color:var(--cinza);font-weight:400}
+  .invertida h2 .tag{color:rgba(0,0,0,.42)}
+  a{color:inherit}
+
+  /* ---------- trilha lateral ---------- */
+  .trilha{
+    position:fixed;
+    left:38px; top:0; bottom:0;
+    width:34px;
+    display:flex; flex-direction:column;
+    align-items:center; justify-content:center;
+    gap:34px;
+    z-index:10;
+    mix-blend-mode:difference;
+  }
+  .trilha a{
+    display:block;
+    width:22px; height:26px;
+    opacity:.34;
+    transition:opacity .25s ease;
+    text-decoration:none;
+  }
+  .trilha a:hover,.trilha a[aria-current="true"]{opacity:1}
+  .trilha svg{display:block;width:100%;height:100%}
+  .trilha svg *{stroke:#fff;stroke-width:9;fill:none}
+
+  /* ---------- estrutura ---------- */
+  main{padding-left:132px}
+  .faixa{padding:0 48px 0 0}
+  .interna{max-width:var(--col)}
+  section{padding:112px 0}
+  section+section{border-top:1px solid var(--linha)}
+
+  /* ---------- abertura ---------- */
+  .abertura{
+    min-height:100svh;
+    display:flex; align-items:center;
+    padding:96px 48px 96px 0;
+    border:0;
+  }
+  .marca{
+    width:64px; height:214px;
+    flex:none;
+    margin-right:52px;
+  }
+  .marca line,.marca polyline{
+    stroke:#fff; stroke-width:8; fill:none;
+    stroke-dasharray:var(--d,200);
+    stroke-dashoffset:var(--d,200);
+    animation:tracar .7s cubic-bezier(.65,0,.35,1) forwards;
+  }
+  .marca .g1{animation-delay:.12s}
+  .marca .g2{animation-delay:.34s}
+  .marca .g3{animation-delay:.56s}
+  @keyframes tracar{to{stroke-dashoffset:0}}
+
+  .abertura h1{font-size:clamp(34px,5.6vw,68px)}
+  .abertura .linha-role{
+    font-size:clamp(18px,2vw,23px);
+    line-height:1.5;
+    margin:26px 0 0;
+    max-width:34ch;
+  }
+  .abertura .meta{
+    margin-top:40px;
+    font-size:15px;
+    color:var(--cinza);
+    line-height:2;
+  }
+  .abertura .texto{opacity:0;animation:surgir .8s ease .8s forwards}
+  @keyframes surgir{to{opacity:1}}
+
+  .disponivel{
+    display:inline-flex; align-items:center; gap:9px;
+    color:var(--branco);
+    text-decoration:none;
+    border-bottom:1px solid rgba(255,255,255,.3);
+    padding-bottom:2px;
+    transition:border-color .2s ease;
+  }
+  .disponivel:hover{border-color:#fff}
+  .ponto{
+    width:7px;height:7px;border-radius:50%;
+    background:#fff;flex:none;
+  }
+
+  /* ---------- trabalhos ---------- */
+  h2{font-size:clamp(24px,2.8vw,33px);margin-bottom:12px}
+  .intro-secao{color:var(--cinza);margin:0 0 56px;max-width:52ch}
+
+  .caso{border-top:1px solid var(--linha);padding-top:40px;max-width:74ch}
+  .caso h3{font-size:clamp(21px,2.4vw,27px);font-weight:700}
+  .caso .stack{
+    display:block;margin-top:12px;
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;
+    font-size:13px;color:var(--cinza);letter-spacing:-.02em;
+  }
+  .caso .resumo{margin:26px 0 0;max-width:58ch}
+  .detalhes{margin:40px 0 0;display:grid;gap:2px}
+  .detalhes>div{
+    display:grid;
+    grid-template-columns:minmax(0,11rem) minmax(0,1fr);
+    gap:8px 32px;
+    padding:16px 0;
+    border-top:1px solid var(--linha);
+  }
+  .detalhes dt{
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:13px;
+    color:var(--cinza);padding-top:4px;
+  }
+  .detalhes dd{margin:0;font-size:16px;line-height:1.6;max-width:50ch}
+  .ver{
+    display:inline-block;margin-top:36px;
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:16px;
+    letter-spacing:-.01em;
+    padding-bottom:5px;
+    border-bottom:1px solid var(--branco);
+    text-decoration:none;
+    transition:opacity .2s ease;
+  }
+  .ver:hover{opacity:.6}
+
+  /* ---------- sobre (polaridade invertida) ---------- */
+  .invertida{
+    background:var(--branco);
+    color:var(--preto);
+    margin-left:-132px;
+    padding:112px 48px 112px 132px;
+    border:0;
+  }
+  .invertida .destaque{
+    font-size:clamp(21px,2.6vw,28px);
+    line-height:1.5;
+    font-weight:300;
+    margin:0 0 32px;
+  }
+  .invertida p{max-width:62ch}
+  .invertida .ferramentas{
+    margin-top:44px;padding-top:26px;
+    border-top:1px solid var(--linha-inv);
+    font-size:15px;line-height:1.6;
+  }
+  .invertida .ferramentas p{
+    display:grid;
+    grid-template-columns:minmax(0,8.5rem) minmax(0,1fr);
+    gap:4px 20px;
+    margin:0;padding:9px 0;
+  }
+  .invertida .ferramentas p+p{border-top:1px solid rgba(0,0,0,.08)}
+  .invertida .ferramentas b{font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:13px}
+
+  /* ---------- contato ---------- */
+  .contato p{max-width:52ch;color:var(--cinza);margin:0 0 40px}
+  .canais{list-style:none;margin:0;padding:0}
+  .canais li{border-bottom:1px solid var(--linha)}
+  .canais li:first-child{border-top:1px solid var(--linha)}
+  .canais a{
+    display:flex;align-items:baseline;gap:20px;
+    padding:20px 4px;
+    text-decoration:none;
+    font-family:"Fira Code",ui-monospace,SFMono-Regular,monospace;font-weight:500;font-size:19px;
+    letter-spacing:-.02em;
+    transition:padding-left .2s ease;
+  }
+  .canais a:hover,.canais a:focus-visible{padding-left:14px}
+  .canais .qual{
+    font-family:"Newsreader",serif;font-weight:300;font-size:15px;
+    color:var(--cinza);
+  }
+
+  footer{
+    padding:40px 48px 56px 0;
+    border-top:1px solid var(--linha);
+    color:var(--cinza);font-size:14px;
+  }
+
+  a:focus-visible,.trilha a:focus-visible{
+    outline:2px solid #fff;outline-offset:4px;opacity:1;
+  }
+  .invertida a:focus-visible{outline-color:#000}
+
+  @media (max-width:820px){
+    body{font-size:16px}
+    .trilha{display:none}
+    main{padding-left:24px}
+    .faixa,footer{padding-right:24px}
+    .abertura{padding:72px 24px 72px 0;min-height:auto;flex-direction:column;align-items:flex-start}
+    .marca{width:46px;height:154px;margin:0 0 40px}
+    section{padding:72px 0}
+    .detalhes>div{grid-template-columns:1fr;gap:6px;padding:14px 0}
+    .detalhes dt{padding-top:0}
+    .invertida{margin-left:-24px;padding:72px 24px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    *,*::before,*::after{animation:none!important;transition:none!important}
+    .marca line,.marca polyline{stroke-dashoffset:0}
+    .abertura .texto{opacity:1}
+  }
